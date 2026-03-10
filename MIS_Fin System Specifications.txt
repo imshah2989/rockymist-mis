@@ -1,0 +1,85 @@
+Create an MIS Financial System for RockyMist-I. Use System Title "RockyMist-I Financial MIS" accross the system.
+Business Description:
+	1. Located in Khairagali, Murree, Punjab, Pakistan
+	2. Punjab Tax Laws Apply
+	3. Nature of Business: Hospitality
+	4. Penthouse Dream: Comprise of two apartments, Penthouse Dream Apartment that comprise of 4 Beds, 1 Tea Lounge, 1 Bar Lounge cum Kitchen. A two floor setup with 2 bedreems 1 Lounge, 2 bathrooms on each floor. Family Suite: Comprise of 3 bedrooms, lounge cum kitchen. Executive Suite: 1 Bedroom, separate kitchen, and separate lounge. Wheelchair Accessible.
+	5. It is an informally setup business and is rented out per night basis to visiting guests. It is not a registered entity yet. It is geared for both personal and commercial use.
+	6. Facility is also registered with Airbnb and the proceeds are received in a Payoneer Account.
+	7. 
+
+Objective: To build a Financial MIS System to manage finances as well as prepare financial reports for tax compliance. Keep the MIS System up to date with respect to prevailing Tax Levies and obligations towards FBR.
+	Also:
+	1. Continuous ads are run at Instagram for marketing purposes. So we need to keep a tap on Marketing & Advertising Expenses vs Revenue on monthly basis
+	2. Guests are charged for any damages, so provision for that should also be in the system
+	3. Maintainence is carried out during Winters and we feel that there is pilfrilege in Sundry Items and Gas Cylinder fillings. So we need to keep a track of that.
+
+ACTIVE UNITS: (Left Side Bar Drop down List)
+1. Penthouse Dream
+2. Family Suite
+3. Executive Suite
+
+Make sure following Modules are fully functional and available in the MIS:
+0. Login
+1. Entry Module
+	a. AI Smart Entry (Transaction written in simple English. Based on that AI should ask what is this payment for and Who is it being made to. Also ask if the revenue is from local/Social Media Advertising sources or from Airbnb. get as much information from the user as possible. In descriptions, enter as much information sa possible for running Business Intelligence Analysis later on)
+	- Display Entry
+		- Party/Client 
+		- Short Description 
+		- Debit (Target)
+		- Credit (Source)
+		- Amount (PKR)
+		- AI Analysis of Transaction with outcome as a simple Transaction Statement in simple English to compare AI Smart Entry with Outcome of Entry.
+		- Post Entry
+		- Clear Entry
+	b. Manual Entry 
+		- Party/Client Drop Down List
+		- Short Description Field
+		- Debit (Target) - Drop Down List
+		- Credit (Source) - Drop Down List
+		- Amount (PKR)
+		- AI Analysis of Transaction with outcome as a simple Transaction Statement in simple English
+		- Post Manual Entry
+		- Clear Entry
+	c. Pdf Receipt & Bills Processing:
+
+		- System should be able to read pdf images of Receipts and Bills and create a transaction entry for each.
+
+2. Bank Sync Module:
+
+	- Bank Statements PDF (System should be able to read Bank Statement PDF and reconcile with system entries. Display the transactions that could not be found in the system and create and display entries for approval/posting)
+	- Add a button "Analyse with AI" and run through the AI to translate the transaction and suggest the account heads the transaction is affecting. 
+	- Add buttons for "Post AI Entry" AND "Post Manual Entry".
+	- Save the entries/transactions in a spreadsheet with Date, Details, Debit, Credit, Notes
+
+
+2. Reports
+	- General Journal for Period Start Date to End Date
+	- General Ledger for Period Start Date to End Date
+	- Accounts Receivables for Period Start Date to End Date
+	- Accounts Payable for Period Start Date to End Date
+	- ABN Revenue Report (Airbnb) for Period Start Date to End Date
+	- P&L Statement for Period Start Date to End Date
+	- Cash Flow Statement for Period Start Date to End Date
+	- Balance at Bank (Select Bank from drop down list)
+	- Cash in Hand at a specific date
+	- Balance Sheet for the year (ask)
+	- Income Tax Returns for Period Start Date to End Date
+
+3. Invoicing
+	- Invoice with Tax 
+	- Invoice without Tax
+	- 
+4. Admin
+	- Chart of Accounts
+		- Customers Opening Balance for the previous year
+		- Banks with Closing Balance for the previous year.
+		- Vendors Opening Balances for the previous year
+		- Option to pick an account header and enter opening balance for it. 
+		- Select an entry based on Journal ID to Reverse for correction and adjustments
+
+	- Add a section to Add new account heads in COA.
+
+5. Backup Database
+		- Do Auto Backup Database File and Main Python File MIS_Fin.py in G:\My Drive\Obizworks Financial MIS\Backups.  State when last backup was done. 
+ 

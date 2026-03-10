@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RockyMist-I Financial MIS</title>
+    <meta name="description"
+        content="RockyMist Financial Management Information System — AI-powered accounting dashboard for hospitality">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- ANIMATED BACKGROUND PARTICLES -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- ============ LOGIN SCREEN ============ -->
+    <div id="login-container" class="login-wrapper">
+        <div class="login-card glass-panel">
+            <div class="login-brand">
+                <div class="brand-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                <h1 class="brand-title">RockyMist</h1>
+                <span class="brand-sub">Financial MIS</span>
+            </div>
+            <p class="login-tagline">Secure Financial Access Gateway</p>
+            <form id="login-form">
+                <div class="input-floating">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" autocomplete="off" required>
+                </div>
+                <div class="input-floating">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-glow" id="login-btn">
+                    <span>Authenticate</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+            <div id="login-error" class="error-msg hidden">
+                <i class="fa-solid fa-circle-exclamation"></i> Invalid credentials
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MAIN DASHBOARD ============ -->
+    <div id="dashboard-container" class="hidden">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="sb-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                <div>
+                    <h2>RockyMist</h2>
+                    <span class="sb-version">FinMIS v2.0</span>
+                </div>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="avatar-ring">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div>
+                    <span class="user-name" id="display-user">Admin</span>
+                    <span class="user-role" id="display-role">Administrator</span>
+                </div>
+            </div>
+
+            <div class="sidebar-unit">
+                <label><i class="fa-solid fa-building"></i> Active Unit</label>
+                <select id="active-unit">
+                    <option value="RockyMist_I">RockyMist I</option>
+                    <option value="RockyMist_II">RockyMist II</option>
+                    <option value="Penthouse_Dream">Penthouse Dream</option>
+                </select>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-target="view-dashboard"><i class="fa-solid fa-grid-2"></i>
+                    Dashboard</button>
+                <button class="nav-item" data-target="view-entry"><i class="fa-solid fa-plus-circle"></i> Entry
+                    Desk</button>
+                <button class="nav-item" data-target="view-reports"><i class="fa-solid fa-chart-pie"></i>
+                    Reports</button>
+                <button class="nav-item" data-target="view-sync"><i class="fa-solid fa-file-pdf"></i> PDF Sync</button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- ===== DASHBOARD VIEW ===== -->
+            <section id="view-dashboard" class="view-section active">
+                <div class="page-header">
+                    <div>
+                        <h1>Dashboard</h1>
+                        <p>Real-time financial overview powered by Google Sheets</p>
+                    </div>
+                    <div class="header-date" id="header-date"></div>
+                </div>
+
+                <!-- KPI Widgets -->
+                <div class="kpi-grid">
+                    <div class="kpi-card kpi-cash">
+                        <div class="kpi-icon"><i class="fa-solid fa-wallet"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Cash in Hand</span>
+                            <span class="kpi-value" id="dash-cash">PKR 0</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-revenue">
+                        <div class="kpi-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Total Revenue</span>
+                            <span class="kpi-value" id="dash-revenue">PKR 0</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-expense">
+                        <div class="kpi-icon"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Total Expenses</span>
+                            <span class="kpi-value" id="dash-expense">PKR 0</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-net">
+                        <div class="kpi-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Net Profit/Loss</span>
+                            <span class="kpi-value" id="dash-net">PKR 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Transactions</h3>
+                        <span class="badge-live"><i class="fa-solid fa-circle"></i> Live from Google Sheets</span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Account</th>
+                                    <th>Party</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                    <th>Source</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-txn-body">
+                                <tr>
+                                    <td colspan="7" class="empty-state"><i class="fa-solid fa-inbox"></i> No
+                                        transactions yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== ENTRY DESK VIEW ===== -->
+            <section id="view-entry" class="view-section hidden">
+                <div class="page-header">
+                    <div>
+                        <h1>Transaction Entry</h1>
+                        <p>Log income or expenses via AI or manually</p>
+                    </div>
+                </div>
+
+                <div class="entry-tabs">
+                    <button class="entry-tab active" data-tab="ai-entry">
+                        <i class="fa-solid fa-brain"></i> AI Smart Entry
+                    </button>
+                    <button class="entry-tab" data-tab="manual-entry">
+                        <i class="fa-solid fa-pen-to-square"></i> Manual Entry
+                    </button>
+                </div>
+
+                <!-- AI Entry -->
+                <div id="ai-entry" class="tab-panel active">
+                    <div class="section-card">
+                        <div class="ai-header">
+                            <div class="ai-badge"><i class="fa-solid fa-microchip"></i> Cerebras AI</div>
+                            <span>Describe your transaction in plain English</span>
+                        </div>
+                        <textarea id="ai-input"
+                            placeholder="e.g. I spent 5000 from cash for Instagram Marketing..."></textarea>
+                        <button id="btn-analyze-ai" class="btn-glow">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Analyze with Cerebras AI</span>
+                        </button>
+
+                        <div id="ai-result-box" class="ai-result hidden">
+                            <div class="ai-result-header">
+                                <i class="fa-solid fa-check-circle"></i> AI Interpretation
+                            </div>
+                            <p id="ai-outcome-text" class="ai-outcome"></p>
+                            <div class="ai-badges">
+                                <div class="ai-tag tag-dr"><span>DR</span> <strong id="ai-dr"></strong></div>
+                                <div class="ai-tag tag-cr"><span>CR</span> <strong id="ai-cr"></strong></div>
+                                <div class="ai-tag tag-amt"><span>AMT</span> <strong>PKR <span
+                                            id="ai-amt"></span></strong></div>
+                                <div class="ai-tag tag-party"><span>PARTY</span> <strong id="ai-party"></strong></div>
+                            </div>
+                            <button id="btn-post-ai" class="btn-success">
+                                <i class="fa-solid fa-paper-plane"></i> Approve & Post to Google Sheets
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual Entry -->
+                <div id="manual-entry" class="tab-panel hidden">
+                    <div class="section-card">
+                        <form id="manual-form" class="manual-grid">
+                            <div class="fg">
+                                <label><i class="fa-solid fa-calendar"></i> Date</label>
+                                <input type="date" id="man-date" required>
+                            </div>
+                            <div class="fg">
+                                <label><i class="fa-solid fa-user-tag"></i> Party/Client</label>
+                                <select id="man-party"></select>
+                            </div>
+                            <div class="fg">
+                                <label><i class="fa-solid fa-arrow-right-to-bracket"></i> Debit Account</label>
+                                <select id="man-dr" required></select>
+                            </div>
+                            <div class="fg">
+                                <label><i class="fa-solid fa-arrow-right-from-bracket"></i> Credit Account</label>
+                                <select id="man-cr" required></select>
+                            </div>
+                            <div class="fg fg-wide">
+                                <label><i class="fa-solid fa-coins"></i> Amount (PKR)</label>
+                                <input type="number" step="0.01" id="man-amt" placeholder="0.00" required>
+                            </div>
+                            <div class="fg fg-wide">
+                                <label><i class="fa-solid fa-align-left"></i> Details</label>
+                                <input type="text" id="man-desc" placeholder="Description of transaction..." required>
+                            </div>
+                            <div class="fg fg-wide fg-actions">
+                                <button type="submit" class="btn-glow">
+                                    <i class="fa-solid fa-paper-plane"></i> Post Manual Entry
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== REPORTS VIEW ===== -->
+            <section id="view-reports" class="view-section hidden">
+                <div class="page-header">
+                    <div>
+                        <h1>Financial Reports</h1>
+                        <p>Generate ledgers and P&L statements from Google Sheets</p>
+                    </div>
+                </div>
+
+                <div class="kpi-grid kpi-grid-2">
+                    <div class="kpi-card kpi-cash">
+                        <div class="kpi-icon"><i class="fa-solid fa-wallet"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Cash in Hand</span>
+                            <span class="kpi-value" id="metric-cash">PKR 0</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-net">
+                        <div class="kpi-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Net P&L</span>
+                            <span class="kpi-value" id="metric-pnl">PKR 0</span>
+                            <span class="kpi-sub" id="metric-pnl-sub">Rev: 0 | Exp: 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="report-bar">
+                        <div class="rg">
+                            <label>Start Date</label>
+                            <input type="date" id="rep-start">
+                        </div>
+                        <div class="rg">
+                            <label>End Date</label>
+                            <input type="date" id="rep-end">
+                        </div>
+                        <button id="btn-fetch-reports" class="btn-glow">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i> Generate Ledger
+                        </button>
+                    </div>
+                </div>
+
+                <div class="section-card hidden" id="journal-container">
+                    <div class="section-header">
+                        <h3><i class="fa-solid fa-book-open"></i> General Ledger</h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Account</th>
+                                    <th>Party</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                </tr>
+                            </thead>
+                            <tbody id="journal-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== PDF SYNC VIEW ===== -->
+            <section id="view-sync" class="view-section hidden">
+                <div class="page-header">
+                    <div>
+                        <h1>Bank PDF Sync</h1>
+                        <p>Upload bank statements for auto-extraction and Cerebras AI analysis</p>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="dropzone" id="dropzone">
+                        <div class="dropzone-inner">
+                            <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+                            <h3>Drag & Drop PDF Here</h3>
+                            <p>or click to browse your files</p>
+                            <input type="file" id="pdf-upload" accept="application/pdf">
+                            <div class="dropzone-file hidden" id="dropzone-filename">
+                                <i class="fa-solid fa-file-pdf"></i> <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn-process-pdf" class="btn-glow mt-2" disabled>
+                        <i class="fa-solid fa-microchip"></i> Analyze with Cerebras AI
+                    </button>
+                </div>
+
+                <div id="pdf-result" class="section-card hidden">
+                    <div class="section-header">
+                        <h3><i class="fa-solid fa-robot"></i> Cerebras AI Analysis</h3>
+                    </div>
+                    <div class="ai-outcome" id="pdf-ai-outcome"></div>
+                    <div class="code-block">
+                        <div class="code-label"><i class="fa-solid fa-file-lines"></i> Extracted Text Preview</div>
+                        <pre id="pdf-raw-text"></pre>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast hidden">
+        <i class="fa-solid fa-check-circle"></i>
+        <span id="toast-msg">Success</span>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

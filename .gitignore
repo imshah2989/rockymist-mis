@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+
+# Secrets and Databases
+credentials.json
+backend/credentials.json
+.env
+RockyMist_System.local.db
+backend/RockyMist_System.local.db
+RockyMist_System.db
+*.db
