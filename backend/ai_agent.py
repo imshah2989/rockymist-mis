@@ -5,12 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# We use the openAI client structure pointing to Cerebras
-# Ensure CEREBRAS_API_KEY is in your environment variables
-client = OpenAI(
-    api_key=os.environ.get("CEREBRAS_API_KEY", "default_key"),
-    base_url="https://api.cerebras.ai/v1"
-)
+def get_client():
+    return OpenAI(
+        api_key=os.environ.get("CEREBRAS_API_KEY", "default_key"),
+        base_url="https://api.cerebras.ai/v1"
+    )
 
 def analyze_transaction(user_input: str, active_unit: str, valid_accounts: list) -> dict:
     """
@@ -30,6 +29,7 @@ def analyze_transaction(user_input: str, active_unit: str, valid_accounts: list)
     'outcome' should be a simple English summary of what you did.
     """
 
+    client = get_client()
     try:
         response = client.chat.completions.create(
             model="llama3.1-8b", # High-speed inference model on Cerebras
