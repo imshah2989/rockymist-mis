@@ -6,8 +6,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def get_client():
+    raw_key = os.environ.get("CEREBRAS_API_KEY", "default_key")
+    # Strip any whitespace or quotes that HF Spaces may add
+    clean_key = raw_key.strip().strip('"').strip("'").strip()
     return OpenAI(
-        api_key=os.environ.get("CEREBRAS_API_KEY", "default_key"),
+        api_key=clean_key,
         base_url="https://api.cerebras.ai/v1"
     )
 
