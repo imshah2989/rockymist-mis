@@ -6,19 +6,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def get_client():
-    raw_key = os.environ.get("CEREBRAS_API_KEY", "default_key")
-    # Strip any whitespace or quotes that HF Spaces may add
+    raw_key = os.environ.get("GROQ_API_KEY", "default_key")
+    # Strip any whitespace or quotes that may be present
     clean_key = raw_key.strip().strip('"').strip("'").strip()
     return OpenAI(
         api_key=clean_key,
-        base_url="https://api.cerebras.ai/v1"
+        base_url="https://api.groq.com/openai/v1"
     )
 
 def analyze_transaction(user_input: str, active_unit: str, valid_accounts: list) -> dict:
-    """
-    Takes natural language input, feeds it to Cerebras AI, and returns a JSON dictionary 
-    with the structured transaction mapping.
-    """
+    # ... (docstring shortened for brevity)
     prompt = f"""
     You are an expert financial accountant parsing transactions for a hospitality business.
     Unit: {active_unit}. 
@@ -35,7 +32,7 @@ def analyze_transaction(user_input: str, active_unit: str, valid_accounts: list)
     client = get_client()
     try:
         response = client.chat.completions.create(
-            model="llama3.1-8b", # High-speed inference model on Cerebras
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": "You are a specialized JSON-only output agent."},
                 {"role": "user", "content": prompt}

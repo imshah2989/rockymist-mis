@@ -186,7 +186,7 @@ $('btn-analyze-ai').addEventListener('click', async () => {
     if (!input) return;
 
     const btn = $('btn-analyze-ai');
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Cerebras is thinking...</span>';
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Groq is thinking...</span>';
     btn.disabled = true;
 
     try {
@@ -201,9 +201,9 @@ $('btn-analyze-ai').addEventListener('click', async () => {
 
         $('ai-result-box').classList.remove('hidden');
     } catch (e) {
-        showToast('AI Analysis Failed — Check Cerebras Token');
+        showToast('AI Analysis Failed — Check Groq Token');
     } finally {
-        btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> <span>Analyze with Cerebras AI</span>';
+        btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> <span>Analyze with Groq AI</span>';
         btn.disabled = false;
     }
 });
@@ -341,7 +341,7 @@ function handlePDFSelect(file) {
 $('btn-process-pdf').addEventListener('click', async () => {
     if (!pendingFile) return;
     const btn = $('btn-process-pdf');
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cerebras is analyzing...';
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Groq is analyzing...';
     btn.disabled = true;
 
     try {
@@ -357,7 +357,7 @@ $('btn-process-pdf').addEventListener('click', async () => {
     } catch (e) {
         showToast('PDF Analysis Failed');
     } finally {
-        btn.innerHTML = '<i class="fa-solid fa-microchip"></i> Analyze with Cerebras AI';
+        btn.innerHTML = '<i class="fa-solid fa-microchip"></i> Analyze with Groq AI';
         btn.disabled = false;
     }
 });

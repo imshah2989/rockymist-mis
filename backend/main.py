@@ -121,8 +121,8 @@ def ai_analyze_transaction(req: AIEntryRequest):
 def ai_post_transaction(req: AIPostRequest):
     try:
         rows = [
-            [req.entry_date, req.active_unit, req.desc, req.dr_acc, req.party, req.amt, 0, "AI Cerebras", req.user_id],
-            [req.entry_date, req.active_unit, req.desc, req.cr_acc, req.party, 0, req.amt, "AI Cerebras", req.user_id]
+            [req.entry_date, req.active_unit, req.desc, req.dr_acc, req.party, req.amt, 0, "AI Groq", req.user_id],
+            [req.entry_date, req.active_unit, req.desc, req.cr_acc, req.party, 0, req.amt, "AI Groq", req.user_id]
         ]
         append_transactions(rows)
         return {"status": "success"}
